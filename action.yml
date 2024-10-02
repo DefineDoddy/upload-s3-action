@@ -1,4 +1,4 @@
-name: Upload to S3
+name: Advanced S3 Upload
 description: 'Upload directory to S3'
 author: 'DefineDoddy'
 branding:
