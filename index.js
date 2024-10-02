@@ -25,7 +25,7 @@ const DESTINATION_DIR = core.getInput('destination_dir', {
 const ENDPOINT = core.getInput('endpoint', {
   required: false,
 });
-const ACL = core.getInput('acl', {
+const CONTENT_DISPOSITION = core.getInput('content_disposition', {
   required: false,
 });
 
@@ -65,11 +65,14 @@ function run() {
       );
       const params = {
         Bucket: BUCKET,
-        ACL: ACL ? ACL : 'public-read',
+        ACL: 'public-read',
         Body: fileStream,
         Key: bucketPath,
         ContentType: lookup(p.path) || 'text/plain',
       };
+      if (CONTENT_DISPOSITION) {
+        params.ContentDisposition = CONTENT_DISPOSITION;
+      }
       return upload(params);
     })
   );
